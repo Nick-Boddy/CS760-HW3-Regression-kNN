@@ -171,13 +171,13 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_{1} = 
 		\begin{center}
 			\begin{tabular}{ c  c  c  c }
 				\hline
-				$X_{1}$ & $X_{2}$ & $X_{3}$ & $D_{(0, 0, 0)}$ \\ \hline
-				0 & 3 & 0 & $\sqrt{0^2 + 3^2 + 0^2} = 3$ \\
-				2 & 0 & 0 & $\sqrt{2^2 + 0^2 + 0^2} = 2$ \\
-				0 & 1 & 3 & $\sqrt{0^2 + 1^2 + 3^2} \approx 3.16$ \\
-				0 & 1 & 2 & $\sqrt{0^2 + 1^2 + 2^2} \approx 2.24$ \\
-				-1 & 0 & 1 & $\sqrt{(-1)^2 + 0^2 + 1^2} \approx 1.41$ \\
-				1 & 1 & 1 & $\sqrt{1^2 + 1^2 + 1^2} \approx 1.73$  \\
+				$X_{1}$ & $X_{2}$ & $X_{3}$ & $D_{(0, 0, 0)}$ \\ \hline \\
+				0 & 3 & 0 & $\sqrt{0^2 + 3^2 + 0^2} = 3$ \\ \\
+				2 & 0 & 0 & $\sqrt{2^2 + 0^2 + 0^2} = 2$ \\ \\
+				0 & 1 & 3 & $\sqrt{0^2 + 1^2 + 3^2} \approx 3.16$ \\ \\
+				0 & 1 & 2 & $\sqrt{0^2 + 1^2 + 2^2} \approx 2.24$ \\ \\
+				-1 & 0 & 1 & $\sqrt{(-1)^2 + 0^2 + 1^2} \approx 1.41$ \\ \\
+				1 & 1 & 1 & $\sqrt{1^2 + 1^2 + 1^2} \approx 1.73$  \\ \\
 				\hline
 			\end{tabular}
 		\end{center}
@@ -198,24 +198,35 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_{1} = 
 \begin{enumerate}
 	\item (2pts) Suppose that we have a set of observations, each with measurements on $p=1$ feature, $X$. We assume that $X$ is uniformly (evenly) distributed on [0, 1]. Associated with each observation is a response value. Suppose that we wish to predict a test observation’s response using only observations that are within 10\% of the range of $X$ closest to that test observation. For instance, in order to predict the response for a test observation with $X=0.6$, we will use observations in the range [0.55, 0.65]. On average, what fraction of the available observations will we use to make the prediction?
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln} Since X is uniformly distributed on $[0, 1]$, on average, \textbf{$\frac{1}{10}$} of the available observations are used in the prediction. \end{soln}
 	
 	
 	\item (2pts) Now suppose that we have a set of observations, each with measurements on $p =2$ features, $X1$ and $X2$. We assume that predict a test observation’s response using only observations that $(X1,X2)$ are uniformly distributed on [0, 1] × [0, 1]. We wish to are within 10\% of the range of $X1$ and within 10\% of the range of $X2$ closest to that test observation. For instance, in order to predict the response for a test observation with $X1 =0.6$ and $X2 =0.35$, we will use observations in the range [0.55, 0.65] for $X1$ and in the range [0.3, 0.4] for $X2$. On average, what fraction of the available observations will we use to make the prediction?
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  Since $X1$ and $X2$ are both uniformly distributed across $[0, 1]$, we take, on average, $10\%$ of $10\%$ of the available observations, which is \textbf{$\frac{1}{100}$} \end{soln}
 	
 	\item (2pts) Now suppose that we have a set of observations on $p = 100$ features. Again the observations are uniformly distributed on each feature, and again each feature ranges in value from 0 to 1. We wish to predict a test observation’s response using observations within the 10\% of each feature’s range that is closest to that test observation. What fraction of the available observations will we use to make the prediction?
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  With $p \geq 1$ features, each uniformly distributed, if we only consider observations in the nearest $10\%$ of each and every feature, on average we only consider $\frac{1}{10^p}$ of the available observations when making a prediction. \linebreak \textbf{With $p = 100$, we consider $\frac{1}{10^{100}}$ of the available observations.} \end{soln}
 	
 	\item (3pts) Using your answers to parts (a)–(c), argue that a drawback of KNN when p is large is that there are very few training observations “near” any given test observation.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  As explained in part (c), with each new feature, we remove 90\% of the available observations for predictions (at least when only taking those within $10\%$ of each feature). Thus, with large p, we lose an exponential number of observations when it comes to prediction. This is an inherent drawback of KNN. \end{soln}
 	
 	\item (3pts) Now suppose that we wish to make a prediction for a test observation by creating a $p$-dimensional hypercube centered around the test observation that contains, on average, 10\% of the training observations. For $p =$1, 2, and 100, what is the length of each side of the hypercube? Comment what happens to the length of the sides as $\lim_{{p \to \infty}}$.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  We want to use about $10\%$ of training observations. Assuming each feature is uniformly distributed on $[0, 1]$, we want to consider the length $l$ of the sides of the hypercube that contains $\approx 10\%$ of training observations. Because the range of each feature is $1$, the hypercube of the entire feature space will always have a volume of $1$. Therefore, the volume of the hypercube containing $\approx10\%$ of the training observations will be $0.1(1) = 0.1$.
+		\\ \\
+		$p = 1: l = 0.1$
+		\\ \\
+		$p = 2: l =\sqrt{0.1}$
+		\\ \\
+		$p = 100: l = \sqrt[100]{0.1}$
+		\\ \\
+		$l = \sqrt[p]{0.1} = 0.1^{1/p}$
+		\\ \\
+		$\lim_{p \to \infty} 0.1^{1/p} = 1$
+	\end{soln}
 	
 \end{enumerate}
 
@@ -233,11 +244,11 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_{1} = 
 Calculate
 \begin{enumerate}
 	\item (2 pts) Accuracy
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  \\ Accuracy = $\frac{TP + TN}{TP + FP + TN + FN} = \frac{8 + 974}{8 + 16 + 974 + 2} = 0.982$ \end{soln}
 	\item (2 pts) Precision
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  \\ Precision = $\frac{TP}{TP + FP} = \frac{8}{8 + 16} = 0.\overline{3}$ \end{soln}
 	\item (2 pts) Recall
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  \\ Recall = $\frac{TP}{TP + FN} = \frac{8}{8 + 2} = 0.8$ \end{soln}
 \end{enumerate}
 
 
