@@ -29,6 +29,10 @@
 \usepackage{textcomp}
 \usepackage{caption}
 \usepackage{multirow}
+\usepackage{pgfplots}
+
+\usepgfplotslibrary{external}
+\tikzexternalize
 
 
 \urlstyle{rm}
@@ -275,11 +279,50 @@ Confidence positive & Correct class \\ \hline
 \begin{enumerate}
 	\item (6pts) Draw a ROC curve based on the above table.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}
+		\begin{center}
+			\begin{tabular}{ c  c  c  c }
+				\hline
+				Confidence positive & Correct class & TPR & FPR \\ \hline
+				0.95 & + \\
+				0.85 & + & 2/6 & 0/4 \\ \hline
+				0.8 & - \\
+				0.7 & + \\
+				0.55 & + & 4/6 & 1/4 \\ \hline
+				0.45 & - \\
+				0.4 & + \\
+				0.3 & + & 6/6 & 2/4 \\ \hline
+				0.2 & - \\
+				0.1 & - & 6/6 & 4/4 \\
+				\hline
+			\end{tabular}
+			\begin{tikzpicture}
+				\begin{axis}[
+					title={Spam Detection},
+					xlabel={False Positive Rate},
+					ylabel={True Positive Rate},
+					xmin=0, xmax=1,
+					ymin=0, ymax=1,
+					xtick={0,.2, .4, .6, .8, 1},
+					ytick={0,.2, .4, .6, .8, 1},
+					ymajorgrids=true,
+					grid style=dashed,
+				]
+				\addplot[
+					color=red,
+					mark=square,
+				]
+				coordinates {
+					(0/4,2/6)(1/4,4/6)(2/4,6/6)(4/4,6/6)
+				};
+				\end{axis}
+			\end{tikzpicture}
+		\end{center}
+	\end{soln}
 	
 	\item (3pts) (Real-world open question) Suppose you want to choose a threshold parameter so that mails with confidence positives above the threshold can be classified as spam. Which value will you choose? Justify your answer based on the ROC curve.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}  Personally speaking, I would assign a much higher misclassification cost for False Positives than for False Negatives. If a real email (that is not spam) were to be misclassified as spam, I would likely never see it. This could have dire consequences since that email may be very important. On the other hand, if a spam email is misclassified as not spam, it's not a big deal to me - I'm fairly good at determining what is and what is not spam and can just simply mark it as spam myself. \\ Therefore, I would choose a confidence threshold of $0.85$. This is because the ROC curve indicates that for this confidence threshold, we have a False Positive Rate of $0$, while still maintaining a True Positive Rate of $0.\overline{3}$. \end{soln}
 \end{enumerate}
 
 \item (8 pts) In this problem, we will walk through a single step of the gradient descent algorithm for logistic regression. As a reminder,
