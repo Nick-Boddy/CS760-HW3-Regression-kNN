@@ -357,16 +357,20 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 	You should overlay the training set in the plot, just make sure we can tell which points are training, which are grid.
 	
 	The expected figure looks like this.
-	\begin{figure}[h]
-		\centering
+	%\begin{figure}[h]
+	%	\centering
 		%\includegraphics[width=5cm]{implementation1_expected_result.png}
+	%\end{figure}
+	
+	\begin{figure}[h]
+		\includegraphics{1nn_visualization.png}
 	\end{figure}
 	
 	\paragraph{Spam filter} Now, we will use 'emails.csv' as our dataset. The description is as follows.
-	\begin{figure}[h]
-		\centering
+	%\begin{figure}[h]
+	%	\centering
 		%\includegraphics[width=\linewidth]{email_head.png}
-	\end{figure}
+	%\end{figure}
 	
 	\begin{itemize}
 		\item Task: spam detection
@@ -386,7 +390,20 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 	
 	\item (8 pts) Implement 1NN, Run 5-fold cross validation. Report accuracy, precision, and recall in each fold.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}
+		\begin{center}
+			\begin{tabular}{ c  c  c  c }
+				\hline
+				Fold & Accuracy & Precision & Recall \\ \hline
+				Fold 1 & 0.860 & 0.713 & 0.853 \\
+				Fold 2 & 0.880 & 0.737 & 0.881 \\
+				Fold 3 & 0.910 & 0.805 & 0.901 \\
+				Fold 4 & 0.901 & 0.808 & 0.871 \\
+				Fold 5 & 0.825 & 0.677 & 0.820 \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{soln}
 	
 	\item (12 pts) Implement logistic regression (from scratch). Use gradient descent (refer to question 6 from part 1) to find the optimal parameters. You may need to tune your learning rate to find a good optimum. Run 5-fold cross validation. Report accuracy, precision, and recall in each fold.
 	
